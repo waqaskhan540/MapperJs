@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mapperjs by waqaskhan540</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Mapperjs</h1>
+      <h2 class="project-tagline">A lightweight javascript library for mapping javascript objects</h2>
+      <a href="https://github.com/waqaskhan540/MapperJs" class="btn">View on GitHub</a>
+      <a href="https://github.com/waqaskhan540/MapperJs/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/waqaskhan540/MapperJs/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="mapperjs" class="anchor" href="#mapperjs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MapperJs</h1>
+
+<p>A lightweight javascript library for mapping javascript objects</p>
+
+<p><strong>MapperJs</strong> allows you to map javascript objects instantly. You can map objects based on property names or indexes. 
+It takes a ‘source’ object and ‘target’ object and maps the values from source to target object.</p>
+
+<h2>
+<a id="example-usage" class="anchor" href="#example-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example usage</h2>
+
+<h4>
+<a id="mapping-similar-objects" class="anchor" href="#mapping-similar-objects" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mapping similar objects</h4>
+
+<p>Suppose we have two objects with same property names and we wish to populate our target object with the same values as of our source object; then we can achieve this using <strong>MapperJs</strong> using the following approach:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Mapper</span>();
+<span class="pl-k">var</span> sourceUser <span class="pl-k">=</span> {
+        firstName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>john<span class="pl-pds">"</span></span>,
+        lastName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>doe<span class="pl-pds">"</span></span>,
+        age <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>17<span class="pl-pds">"</span></span>,
+        postCode <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>1122<span class="pl-pds">"</span></span>,
+    };
+
+    <span class="pl-k">var</span> destUser <span class="pl-k">=</span> {
+        firstName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        lastName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        age <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        postCode <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    }
+
+    <span class="pl-k">var</span> result <span class="pl-k">=</span> <span class="pl-smi">mapper</span>.<span class="pl-en">from</span>(sourceUser).<span class="pl-en">to</span>(destUser).<span class="pl-en">map</span>();
+
+</pre></div>
+
+<h4>
+<a id="mapping-objects-having-partially-similar-properties" class="anchor" href="#mapping-objects-having-partially-similar-properties" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mapping objects having partially similar properties</h4>
+
+<p>If the source and target objects have partially similar properties then <strong>MapperJs</strong> can still map the target object by matching only the properties which exist in source object. See the example below:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Mapper</span>();
+<span class="pl-k">var</span> sourceUser <span class="pl-k">=</span> {
+        firstName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>firstname<span class="pl-pds">"</span></span>,
+        lastName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>lastName<span class="pl-pds">"</span></span>,
+        age <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>17<span class="pl-pds">"</span></span>,
+        postCode <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>1122<span class="pl-pds">"</span></span>,
+        address <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>abc<span class="pl-pds">"</span></span>,
+        phone <span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>111222<span class="pl-pds">"</span></span>
+    };
+
+    <span class="pl-k">var</span> destUser <span class="pl-k">=</span> {
+        firstName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        lastName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        age <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        postCode <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    }
+
+    <span class="pl-k">var</span> result <span class="pl-k">=</span> <span class="pl-smi">mapper</span>.<span class="pl-en">from</span>(sourceUser).<span class="pl-en">to</span>(destUser).<span class="pl-en">map</span>();
+</pre></div>
+
+<h4>
+<a id="mapping-input-forms-to-api-models-without-caring-about-form-field-names" class="anchor" href="#mapping-input-forms-to-api-models-without-caring-about-form-field-names" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mapping input forms to API Models without caring about form field names</h4>
+
+<p>Posting form data to a web server requires the form field names to be exact replicas of your API Models or Parameters. With MapperJs you can make the process a lot easier by creating a javascript object of your API Model in the same order as your form fields and then mapping the form with your API Model.
+The <strong>from</strong>  method also takes a <strong>CSS Selector</strong> to the form and then creates an object of the form and then maps it to the target object.
+Suppose we have an html form like below:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>form<span class="pl-pds">"</span></span>&gt;
+
+First Name:&lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>fname<span class="pl-pds">"</span></span>&gt;
+Last Name: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>lname<span class="pl-pds">"</span></span>&gt;
+Age : &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>&gt;
+
+Email : &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>email<span class="pl-pds">"</span></span>&gt;
+Password :&lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span>&gt;
+
+&lt;/<span class="pl-ent">form</span>&gt;
+</pre></div>
+
+<p>While our web server expects a model with field names </p>
+
+<ul>
+<li>  FirstName</li>
+<li>  LastName</li>
+<li>  Age</li>
+<li>  Email</li>
+<li>  Password</li>
+</ul>
+
+<p>With <strong>MapperJs</strong>  we can achieve this in the following way.
+Create a javascript representation of your API Model with order similar to the input fields defined in the form.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> ServerApiModel <span class="pl-k">=</span> {
+    FirstName<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        LastName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        Age<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        Email<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        <span class="pl-c1">Password</span><span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+    };
+
+    <span class="pl-k">var</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Mapper</span>();
+    <span class="pl-k">var</span> ServerApiModel <span class="pl-k">=</span> <span class="pl-smi">mapper</span>.<span class="pl-en">from</span>(<span class="pl-s"><span class="pl-pds">'</span>.form<span class="pl-pds">'</span></span>).<span class="pl-en">to</span>(ServerApiModel).<span class="pl-en">mapIndex</span>();</pre></div>
+
+<p>As you can see, we have passed the <strong>‘.form’</strong> selector of our input form as a source and mapped it to our empty ServerApiModel. Now, ServerApiModel contains values from the input Form in the same order the fields are defined.</p>
+
+<h4>
+<a id="mapping-objects-based-on-their-property-indexes" class="anchor" href="#mapping-objects-based-on-their-property-indexes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mapping objects based on their property indexes</h4>
+
+<p>If you don’t want to care about the names of the properties but are quite sure that you need the target object be populated with values in exactly the same order as your source object then <strong>mapIndex()</strong> method does this job for you . The property of source object at index ‘0’ will be mapped with ( or its value will be assigned to) the property of target object at index ‘0’ no matter what the name of property is. See the example below:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Mapper</span>();
+
+    <span class="pl-k">var</span> sourceUser <span class="pl-k">=</span> {
+        firstName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>firstname<span class="pl-pds">"</span></span>,
+        lastName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>lastName<span class="pl-pds">"</span></span>,
+        age <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>17<span class="pl-pds">"</span></span>,
+        postCode <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>1122<span class="pl-pds">"</span></span>,
+    };
+
+    <span class="pl-c">//an object with equal but different property names</span>
+    <span class="pl-k">var</span> destUser <span class="pl-k">=</span> {
+        fname <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        lname <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        age <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        postcode <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    }
+
+    <span class="pl-k">var</span> result <span class="pl-k">=</span> <span class="pl-smi">mapper</span>.<span class="pl-en">from</span>(sourceUser).<span class="pl-en">to</span>(destUser).<span class="pl-en">mapIndex</span>();
+</pre></div>
+
+<blockquote>
+<p><strong>The number of properties in ‘source’ and ‘target’ object don't necessarily need to be same.</strong></p>
+</blockquote>
+
+<h4>
+<a id="mapping-objects-based-on-property-names" class="anchor" href="#mapping-objects-based-on-property-names" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mapping Objects based on property names</h4>
+
+<p>The <strong>mapUsing()</strong> method expects a 2-dimensional array of mappings, each element in the array is also an array with two entries i.e. (i) source property name , (ii) target property name.</p>
+
+<div class="highlight highlight-source-js"><pre>Var mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Mapper</span>();
+<span class="pl-k">var</span> sourceUser <span class="pl-k">=</span> {
+            firstName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>firstname<span class="pl-pds">"</span></span>,
+            lastName <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>lastName<span class="pl-pds">"</span></span>,
+            age <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>17<span class="pl-pds">"</span></span>,
+            postCode <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>1122<span class="pl-pds">"</span></span>,
+            address <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>abc<span class="pl-pds">"</span></span>,
+            phone <span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span>111222<span class="pl-pds">"</span></span>
+        };
+
+        <span class="pl-k">var</span> destUser <span class="pl-k">=</span> {
+            FIRSTNAME <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+            LASTNAME <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+            AGE <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+            POSTCODE <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+            ADD<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+            PH<span class="pl-k">:</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+        }
+
+        <span class="pl-k">var</span> mappings <span class="pl-k">=</span> [
+                        [<span class="pl-s"><span class="pl-pds">"</span>firstName<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>FIRSTNAME<span class="pl-pds">"</span></span>],
+                        [<span class="pl-s"><span class="pl-pds">"</span>lastName<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>LASTNAME<span class="pl-pds">"</span></span>],
+                        [<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>AGE<span class="pl-pds">"</span></span>],
+                        [<span class="pl-s"><span class="pl-pds">"</span>postCode<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>POSTCODE<span class="pl-pds">"</span></span>],
+                        [<span class="pl-s"><span class="pl-pds">"</span>address<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>ADD<span class="pl-pds">"</span></span>],
+                        [<span class="pl-s"><span class="pl-pds">"</span>phone<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>PH<span class="pl-pds">"</span></span>]
+                       ];
+
+        destUser <span class="pl-k">=</span> <span class="pl-smi">mapper</span>.<span class="pl-en">from</span>(sourceUser).<span class="pl-en">to</span>(destUser).<span class="pl-en">mapUsing</span>(mappings);
+</pre></div>
+
+<h4>
+<a id="mapping-selective-properties-of-two-objects" class="anchor" href="#mapping-selective-properties-of-two-objects" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mapping selective properties of two objects</h4>
+
+<p>If you don’t want the whole source object to be mapped with your target object but rather want to map only a few properties which are common in both the objects then you can use another method <strong>mapOnly()</strong> to achieve this. 
+This method takes an array of properties which are common in source and target object that you want to be mapped only.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> mapper <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Mapper</span>();
+
+<span class="pl-k">var</span> sourceObj <span class="pl-k">=</span> {
+    Item<span class="pl-k">-</span>name <span class="pl-k">:</span> ‘Abc123’,
+    Item<span class="pl-k">-</span>desc<span class="pl-k">:</span>’a few lines as description’,
+    Item<span class="pl-k">-</span>price <span class="pl-k">:</span> ‘$300.<span class="pl-ii">0</span>’
+};
+
+<span class="pl-k">var</span> destObj <span class="pl-k">=</span> {
+    Item<span class="pl-k">-</span>name <span class="pl-k">:</span>””,
+    Item<span class="pl-k">-</span>price <span class="pl-k">:</span> “”,
+    URL<span class="pl-k">:</span> “”,
+};
+
+<span class="pl-k">var</span> result <span class="pl-k">=</span> <span class="pl-smi">mapper</span>.<span class="pl-en">from</span>(sourceObj).<span class="pl-en">to</span>(destObj).<span class="pl-en">mapOnly</span>([‘Item<span class="pl-k">-</span>name’,’Item<span class="pl-k">-</span>price’]);
+</pre></div>
+
+<p>The resulting object will only contain the values of properties given as array to the <strong>mapOnly()</strong> method.</p>
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<ul>
+<li>Muhammad Waqas</li>
+</ul>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<ul>
+<li>Muhammad Waqas [ <a href="mailto:wasikhan540@gmail.com">wasikhan540@gmail.com</a> ]</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/waqaskhan540/MapperJs">Mapperjs</a> is maintained by <a href="https://github.com/waqaskhan540">waqaskhan540</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>

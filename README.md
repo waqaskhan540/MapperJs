@@ -10,7 +10,7 @@ It takes a ‘source’ object and ‘target’ object and maps the values from 
 Suppose we have two objects with same property names and we wish to populate our target object with the same values as of our source object; then we can achieve this using **MapperJs** using the following approach:
 
 ```javascript
-var mapper = new Mapper();
+
 var sourceUser = {
 		firstName : "john",
 		lastName : "doe",
@@ -25,7 +25,7 @@ var sourceUser = {
 		postCode : "",
 	}
 
-	var result = mapper.from(sourceUser).to(destUser).map();
+	var result = Mapper.from(sourceUser).to(destUser).map();
 
 
 ```
@@ -33,7 +33,7 @@ var sourceUser = {
 If the source and target objects have partially similar properties then **MapperJs** can still map the target object by matching only the properties which exist in source object. See the example below:
 
 ```javascript
-var mapper = new Mapper();
+
 var sourceUser = {
 		firstName : "firstname",
 		lastName : "lastName",
@@ -50,7 +50,7 @@ var sourceUser = {
 		postCode : "",
 	}
 
-	var result = mapper.from(sourceUser).to(destUser).map();
+	var result = Mapper.from(sourceUser).to(destUser).map();
 
 ```
 
@@ -93,8 +93,8 @@ var ServerApiModel = {
 		Password:""
 	};
 
-	var mapper = new Mapper();
-	var ServerApiModel = mapper.from('.form').to(ServerApiModel).mapIndex();
+	
+	var ServerApiModel = Mapper.from('.form').to(ServerApiModel).mapIndex();
 ```
 As you can see, we have passed the **‘.form’** selector of our input form as a source and mapped it to our empty ServerApiModel. Now, ServerApiModel contains values from the input Form in the same order the fields are defined.
 
@@ -102,7 +102,7 @@ As you can see, we have passed the **‘.form’** selector of our input form as
 If you don’t want to care about the names of the properties but are quite sure that you need the target object be populated with values in exactly the same order as your source object then **mapIndex()** method does this job for you . The property of source object at index ‘0’ will be mapped with ( or its value will be assigned to) the property of target object at index ‘0’ no matter what the name of property is. See the example below:
 
 ```javascript
-var mapper = new Mapper();
+
 
 	var sourceUser = {
 		firstName : "firstname",
@@ -119,7 +119,7 @@ var mapper = new Mapper();
 		postcode : "",
 	}
 
-	var result = mapper.from(sourceUser).to(destUser).mapIndex();
+	var result = Mapper.from(sourceUser).to(destUser).mapIndex();
 
 ```
 
@@ -129,7 +129,7 @@ var mapper = new Mapper();
 The **mapUsing()** method expects a 2-dimensional array of mappings, each element in the array is also an array with two entries i.e. (i) source property name , (ii) target property name.
 
 ```javascript
-Var mapper = new Mapper();
+
 var sourceUser = {
 			firstName : "firstname",
 			lastName : "lastName",
@@ -157,7 +157,7 @@ var sourceUser = {
 						["phone","PH"]
 					   ];
 					   
-		destUser = mapper.from(sourceUser).to(destUser).mapUsing(mappings);
+		destUser = Mapper.from(sourceUser).to(destUser).mapUsing(mappings);
 
 ```
 
@@ -166,7 +166,7 @@ If you don’t want the whole source object to be mapped with your target object
 This method takes an array of properties which are common in source and target object that you want to be mapped only.
 
 ```javascript
-var mapper = new Mapper();
+
 
 var sourceObj = {
 	Item-name : ‘Abc123’,
@@ -180,7 +180,7 @@ var destObj = {
 	URL: “”,
 };
 
-var result = mapper.from(sourceObj).to(destObj).mapOnly([‘Item-name’,’Item-price’]);
+var result = Mapper.from(sourceObj).to(destObj).mapOnly([‘Item-name’,’Item-price’]);
 
 ```
 The resulting object will only contain the values of properties given as array to the **mapOnly()** method.

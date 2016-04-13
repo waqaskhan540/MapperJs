@@ -2,63 +2,61 @@
 Author: Muhammad Waqas
 
 */
-
-function  Mapper()  {};
-		
-
-
-	var properties = [];
-
-
-	Mapper.prototype.from = function(source) {
+(function() {
 	
-	try{
+	if(typeof Mapper === 'undefined') {
+	
+		this.Mapper = {
+			
+			from : function(source) {
+	
+			try{
 		
-		if(typeof source === 'object'){
+				if(typeof source === 'object'){
 
-			this.sourceObject = source;
-			var props = Object.getOwnPropertyNames(source);
-		
-		if(!props.length || typeof props !== 'object')
-			throw new Error("object passed has no properties associated")
-			
-			this.sourceProperties = props;
-			return this;
-		}else if(typeof source === 'string') {
-			
-			var form = document.querySelector(source);
-			if(form.tagName === "FORM"){
-			var elements = form.elements,
-				length = elements.length,
-				formObj = {};
-			
-			for(var i =0;i<length;i++) {
+					this.sourceObject = source;
+					var props = Object.getOwnPropertyNames(source);
 				
-				var fieldName = elements[i].getAttribute('name'),
-					value = elements[i].value;
-				formObj[fieldName] = value;
-			}
+				if(!props.length || typeof props !== 'object')
+					throw new Error("object passed has no properties associated")
+					
+					this.sourceProperties = props;
+					return this;
+				}else if(typeof source === 'string') {
+					
+					var form = document.querySelector(source);
+					if(form.tagName === "FORM"){
+					var elements = form.elements,
+						length = elements.length,
+						formObj = {};
+					
+					for(var i =0;i<length;i++) {
+						
+						var fieldName = elements[i].getAttribute('name'),
+							value = elements[i].value;
+						formObj[fieldName] = value;
+					}
+					
+					this.sourceObject = formObj;
+					var props = Object.getOwnPropertyNames(formObj);
+				
+					if(!props.length || typeof props !== 'object')
+						throw new Error("object passed has no properties associated")
+					
+					this.sourceProperties = props;
+					return this;
+					}else {
+						throw new Error("the specified element is not a form");
+					}
+				}
 			
-			this.sourceObject = formObj;
-			var props = Object.getOwnPropertyNames(formObj);
-		
-			if(!props.length || typeof props !== 'object')
-				throw new Error("object passed has no properties associated")
-			
-			this.sourceProperties = props;
-			return this;
-			}else {
-				throw new Error("the specified element is not a form");
-			}
-		}
-			
-	}catch(ex) {
+		}catch(ex) {
 		console.error("'from'",ex.message);
 		
 	}
-	}
+	},
 	
-	Mapper.prototype.to = function(dest) {
+	to : function(dest) {
 	
 	
 		try{
@@ -79,9 +77,8 @@ function  Mapper()  {};
 		{
 			console.error("'to'",ex.message);
 		}
-	}
-	
-	Mapper.prototype.map = function() {
+	},
+	map : function() {
 	
 		var sourceProps = this.sourceProperties,
 		destProps = this.destProperties;
@@ -93,9 +90,8 @@ function  Mapper()  {};
 		
 		}
 		return this.destObject;
-	}
-	
-	Mapper.prototype.mapIndex = function() {
+	},
+	mapIndex : function() {
 	
 		var sourceProps = this.sourceProperties,
 		destProps = this.destProperties,
@@ -111,9 +107,8 @@ function  Mapper()  {};
 		}
 		
 		return this.destObject;
-	}
-	
-	Mapper.prototype.mapOnly = function(props) {
+	},
+	mapOnly : function(props) {
 		
 		
 		
@@ -123,8 +118,8 @@ function  Mapper()  {};
 		}
 		
 		return this.destObject;
-	}
-	Mapper.prototype.mapUsing= function(mappings) {
+	},
+	mapUsing: function(mappings) {
 	
 		
 		
@@ -137,8 +132,12 @@ function  Mapper()  {};
 		return this.destObject;
 	}
 	
-
 	
+			
+		}
+}
+
+})();
 
 
 			

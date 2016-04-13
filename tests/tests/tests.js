@@ -1,11 +1,9 @@
 
 //Create an object for global Access
 
-var mapper = new Mapper();
+//var mapper = new Mapper();
 
-QUnit.test("Is mapper loaded?",function(assert){
-	assert.notEqual(mapper,undefined,"mapper is not 'undefined'");
-});
+
 
 QUnit.test("function : map() objects with equal properties as arguments",function(assert) {
 	
@@ -24,7 +22,7 @@ QUnit.test("function : map() objects with equal properties as arguments",functio
 		postCode : "",
 	}
 
-	var result = mapper.from(sourceUser).to(destUser).map();
+	var result = Mapper.from(sourceUser).to(destUser).map();
 	
 	//compare the results
 	
@@ -54,7 +52,7 @@ QUnit.test("function : map() objects with un-equal properties as arguments",func
 		postCode : "",
 	}
 
-	var result = mapper.from(sourceUser).to(destUser).map();
+	var result = Mapper.from(sourceUser).to(destUser).map();
 	
 	//compare the results
 	
@@ -83,7 +81,7 @@ QUnit.test("function : mapIndex() objects with equal properties as arguments",fu
 		POSTCODE : "",
 	}
 
-	var result = mapper.from(sourceUser).to(destUser).mapIndex();
+	var result = Mapper.from(sourceUser).to(destUser).mapIndex();
 	
 	//compare the results
 	
@@ -114,7 +112,7 @@ QUnit.test("function : mapIndex() objects with un-equal properties as arguments"
 		POSTCODE : "",
 	}
 
-	var result = mapper.from(sourceUser).to(destUser).mapIndex();
+	var result = Mapper.from(sourceUser).to(destUser).mapIndex();
 	
 	//compare the results
 	
@@ -154,7 +152,7 @@ QUnit.test("function : mapWith() with valid array of properties",function(assert
 						["phone","PH"]
 					   ];
 					   
-		destUser = mapper.from(sourceUser).to(destUser).mapUsing(mappings);
+		destUser = Mapper.from(sourceUser).to(destUser).mapUsing(mappings);
 		
 		assert.equal(destUser.FIRSTNAME, sourceUser.firstName);
 		assert.equal(destUser.LASTNAME, sourceUser.lastName);
@@ -182,7 +180,7 @@ QUnit.test("map() : mapping the form with field names", function(assert){
 		EMAIL:""
 	}
 	
-	var ServerApiModel = mapper.from('.form').to(ServerApiModel).mapIndex();
+	var ServerApiModel = Mapper.from('.form').to(ServerApiModel).mapIndex();
 	
 	assert.equal(ServerApiModel.FIRSTNAME , firstnameVal);
 	assert.equal(ServerApiModel.LASTNAME , lastnameVal)
